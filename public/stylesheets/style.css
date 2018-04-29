@@ -1,0 +1,118 @@
+@import url("../font-awesome/css/font-awesome.min.css");
+
+
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+
+.productName{
+  margin-top: -10%;
+	text-align: left;
+	font-size: xx-large;	
+}
+
+.input{
+	border:solid;
+}
+.main {
+	text-align: center;
+    margin: auto;
+    width: 60%;
+    margin-top: 10%;
+}
+.submit {
+  border:solid;
+}
+.userName {
+ font-size: x-large; 
+}
+.password {
+ font-size: x-large; 
+}
+
+.userNameInput {
+  border:solid;
+}
+
+.passwordInput {
+    border:solid;
+}
+
+.resultDiv {
+  text-align: left;
+}
+
+.resultBox{
+  border:solid;
+}
+
+
+.button-container {
+    width: 100%;
+    display:block;
+    position:relative;
+    margin-top: 100px;
+    text-align: center;
+    height: auto;
+}
+
+.btn{
+    font-family: Muli;
+    background: green;
+    border: 4px solid black;
+    cursor: pointer;
+    max-width: 180%;
+    max-height: 100%;
+    width:250px;
+    height: 82;
+    font-size: 120%;
+    text-align: center;
+  }
+
+ .btn2{
+  float:left;
+  border:solid;
+ } 
+
+h1 {
+  color : #000000;
+  text-align : center;
+  font-family: muli;
+}
+
+#productForm{
+font-size: 200%;
+    text-align: center;
+}
+
+#submitButton {
+margin-left: 70%;
+}
+
+#return {
+  margin-left: -6%;
+}
+
+
+@media only screen and(max-width: 568px){
+.main {
+	text-align: center;
+    margin: auto;
+    margin-top: 60%;  
+    width: inherit !important;
+}
+.productName{
+    margin-top: -60%;
+}
+
+#return {
+  margin-left: 1% !important;
+}
+
+
+}
