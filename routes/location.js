@@ -9,6 +9,11 @@ var locationModel = require('../model/locations');
 var userModel = require('../model/users');
 var locationUserModel = require('../model/locationUser');
 var _ = require('lodash');
+var knexClass = require('knex');
+var Config = require('../knexfile');
+const dbConfig = Config.development;
+const knex = knexClass(dbConfig);
+
 
 
 const validator = locationUserModel.validatorRules();
@@ -88,9 +93,11 @@ router.post('/create', middleware, function (req, res, next) {
 			result: errors
 		});
 	} else {
-		req.body.locationType = JSON.stringify(req.body.locationType);
+
 		const result = locationModel.query().insert(req.body).then(location => {
+
 			// update user_location table 
+
 			const body = {
 				userId: res.locals.userId,
 				locationId: location.id,
@@ -201,26 +208,31 @@ router.get('/search', adminMiddleware, function (req, res, next) {
 	}
 });
 
+// route  retrive users for a paticular type of location only admin has access
 router.get('/type/user', adminMiddleware, function (req, res, next) {
-	var locationType = [];
-	locationType.push(req.query.type);
-	const result = locationModel.query().eager('locationUser.user').any('locationType', req.query.type).omit(['encryptedPassword', 'passwordSalt']).then(user => {
-		if (_.isEmpty(user)) {
-			res.status(404).json({
-				success: false,
-				result: 'no user for this location'
+	req.checkQuery("type", "Get users  for a paticular type of location").notEmpty();
+
+	const result = knex.raw(
+			`SELECT users."userName",locations.id,locations."placeId",locations."locationType",locations."googleLocationId",locations.address,user_locations.date,user_locations."locationId",user_locations."userId" FROM locations left join user_locations on locations.id = user_locations."locationId" left join users on
+ user_locations."userId" = users.id   WHERE '${req.query.type}' = ANY ("locationType") 
+ `)
+		.then(data => {
+			if (_.isEmpty(data)) {
+				res.status(404).json({
+					success: false,
+					result: 'no user for this location'
+				});
+			}
+			res.status(200).json({
+				success: true,
+				result: user.rows
 			});
-		}
-		res.status(200).json({
-			success: true,
-			result: user
+		}).catch(error => {
+			res.status(500).json({
+				success: false,
+				result: error
+			});
 		});
-	}).catch(error => {
-		res.status(500).json({
-			success: false,
-			result: error
-		});
-	});
 });
 
 module.exports = router;

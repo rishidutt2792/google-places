@@ -9,6 +9,7 @@ var signUp = require('./routes/signUp');
 var login = require('./routes/login');
 var locationPage = require('./routes/location');
 var validator = require('express-validator');
+var index = require('./routes/index');
 
 
 var app = express();
@@ -37,7 +38,7 @@ app.use(validator());
 // 	maxAge: 2160000000
 // }));
 
-
+app.use('/', index);
 app.use('/login', login);
 app.use('/me', users);
 app.use('/signup', signUp);
