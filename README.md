@@ -139,7 +139,9 @@ url - https://google-places-api.herokuapp.com/
         url - https://google-places-api.herokuapp.com/me/locations
 
 
+# Postman collection Link 
 
+        https://www.getpostman.com/collections/266ba4381df93e5021b5
 
 
      
