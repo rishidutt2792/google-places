@@ -242,7 +242,7 @@ router.get('/type/user', adminMiddleware, function (req, res, next) {
 			}
 			res.status(200).json({
 				success: true,
-				result: user.rows
+				result: data.rows
 			});
 		}).catch(error => {
 			res.status(500).json({
