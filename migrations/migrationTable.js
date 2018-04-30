@@ -15,22 +15,6 @@ exports.up = function (knex, Promise) {
       table.timestamp('updatedAt').notNullable().defaultTo(knex.fn.now());
     }).then(() => {
       console.log('Created Table: users table');
-      const passwordSalt = Bcrypt.genSaltSync(10);
-      const encryptedPassword = Bcrypt.hashSync('admin123456', passwordSalt);
-      const userPasswordSalt = Bcrypt.genSaltSync(10);
-      const userEncryptedPassword = Bcrypt.hashSync('admin123456', userPasswordSalt);
-
-      return knex('users').insert([{
-        userName: 'admin',
-        encryptedPassword,
-        passwordSalt,
-        isAdmin: true
-      }, {
-        userName: 'user',
-        encryptedPassword: userEncryptedPassword,
-        passwordSalt: userPasswordSalt,
-        isAdmin: false
-      }]);
     }),
 
     // location table
