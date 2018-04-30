@@ -4,6 +4,18 @@ url - https://google-places-api.herokuapp.com/
 
 # Requirnment 
     node js, objection js, postgresql
+ 
+# Folder Structure
+    bin/
+    migration/
+    model/
+        migration file
+    routes/ 
+        routes files
+    views/  
+        view files
+    app.js
+    
 
 # Api 
 
