@@ -69,6 +69,29 @@ router.get('/:placeId/details', function (req, res, next) {
 });
 
 
+// get all locations form db
+router.get('/all', adminMiddleware, function (req, res, next) {
+
+	const result = locationModel.query().then(location => {
+		if (_.isEmpty(location)) {
+			res.status(404).json({
+				success: false,
+				result: 'no locations stored in db'
+			});
+		}
+		res.status(200).json({
+			success: true,
+			result: location
+		});
+	}).catch(error => {
+		res.status(500).json({
+			success: false,
+			result: error
+		});
+	});
+});
+
+
 // route to create location and user_location data 
 router.post('/create', middleware, function (req, res, next) {
 
