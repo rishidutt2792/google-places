@@ -11,7 +11,7 @@ var locationUserModel = require('../model/locationUser');
 var _ = require('lodash');
 var knexClass = require('knex');
 var Config = require('../knexfile');
-const dbConfig = Config.development;
+const dbConfig = Config.production;
 const knex = knexClass(dbConfig);
 
 
