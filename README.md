@@ -65,7 +65,8 @@ url - https://google-places-api.herokuapp.com/
        url - https://google-places-api.herokuapp.com/location/placeId/details
     
     this api will get all  geolocation related data of the place       
-
+  
+    
 # Admin Access apis
   
 6) Search users for a paticular location 
@@ -107,4 +108,26 @@ url - https://google-places-api.herokuapp.com/
        
     this api will filter and give all users who searched for a paticular type of location 
     
+9) Api to retrive all locations data stored in DB 
 
+    Access - admin  <br />
+    header - x-access-token <br />
+    request - GET <br />
+    
+       url - https://google-places-api.herokuapp.com/location/all
+
+# Me route 
+
+10) Api to retrive the locations searched by logged in user
+
+    Access - logged in user  <br />
+    header - x-access-token  <br />
+    request - GET  <br />
+    
+        url - https://google-places-api.herokuapp.com/me/locations
+
+
+
+
+
+     
