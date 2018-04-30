@@ -44,9 +44,9 @@ router.get('/', middleware, function (req, res, next) {
 });
 
 // search for location based on placeId
-router.get('/:placeId/details', middleware, function (req, res, next) {
+router.get('/:placeId/details', function (req, res, next) {
 	// validation code
-	req.checkQuery("placeId", "Pass placeId and value in url params").notEmpty();
+	req.checkParams("placeId", "Pass placeId and value in url params").notEmpty();
 	var errors = req.validationErrors();
 	if (errors) {
 		res.status(400).json({
@@ -54,23 +54,17 @@ router.get('/:placeId/details', middleware, function (req, res, next) {
 			result: errors
 		});
 	} else {
-		request('https://maps.googleapis.com/maps/api/place/textsearch/json?placeid=' + req.query.placeid + '&key=' + config.googleApiKey, function (error, response, body) {
-			if (_.isEmpty(data)) {
+		request('https://maps.googleapis.com/maps/api/place/details/json?placeid=' + req.params.placeId + '&key=' + config.googleApiKey, function (error, response, body) {
+			if (_.isEmpty(body)) {
 				res.status(404).json({
 					success: false,
 					result: 'no place found'
 				});
 			}
-			res.status(200).json({
-				success: true,
-				result: body
-			});
-		}).catch(error => {
-			res.status(500).json({
-				success: false,
-				result: 'error'
-			});
-		});
+			return res.status(200).send(
+				body
+			);
+		})
 	}
 });
 
